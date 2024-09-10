@@ -19,7 +19,6 @@
 #ifndef NULL
 #define NULL 0
 #endif
-// electrical leve
 #ifndef LOW
 #define LOW 0
 #endif

@@ -3,6 +3,7 @@
 "npncounter\main.o"
 "npncounter\gpio.o"
 "npncounter\freertos.o"
+"npncounter\tim.o"
 "npncounter\usart.o"
 "npncounter\stm32f1xx_it.o"
 "npncounter\stm32f1xx_hal_msp.o"
@@ -31,6 +32,8 @@
 "npncounter\cmsis_os.o"
 "npncounter\heap_4.o"
 "npncounter\port.o"
+"npncounter\button_4.o"
+"npncounter\tm1637_1.o"
 --strict --scatter "NPNCounter\NPNCounter.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

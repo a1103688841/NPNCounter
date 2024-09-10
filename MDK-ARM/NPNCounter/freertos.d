@@ -34,9 +34,16 @@ npncounter\freertos.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.
 npncounter\freertos.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
 npncounter\freertos.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
 npncounter\freertos.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
+npncounter\freertos.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
+npncounter\freertos.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
 npncounter\freertos.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 npncounter\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 npncounter\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
 npncounter\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 npncounter\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 npncounter\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
+npncounter\freertos.o: ../Core/Src/../../User/button.h
+npncounter\freertos.o: C:\Users\liliput\AppData\Local\Keil_v5\ARM\ARMCC\include\stdbool.h
+npncounter\freertos.o: C:\Users\liliput\AppData\Local\Keil_v5\ARM\ARMCC\include\stdio.h
+npncounter\freertos.o: C:\Users\liliput\AppData\Local\Keil_v5\ARM\ARMCC\include\string.h
+npncounter\freertos.o: ../Core/Src/../../User/tm1637.h

@@ -19,7 +19,6 @@
 static struct button* Head_Button = NULL;
 
 /* -------------------------------------------static function ----------------------------------------- */
-// Function declarations
 static char* StrnCopy(char* dst, const char* src, unsigned int n);
 static void  Button_Cycle_Process(button_t* btn);
 
@@ -40,26 +39,30 @@ static uint8_t Read_SW1_Level(void)
     return (pinState == GPIO_PIN_SET) ? 1 : 0;
 }
 
-// Callback for button SW0 press event
-static void SW0_Down_CallBack(void* btn) {}
-
-// Callback for button SW1 press event
-static void SW1_Down_CallBack(void* btn) {}
+extern void pause_button_down_callcak();
+extern void rst_button_down_callcak();
 
 // Initialize and attach button event callbacks
 void Button_Attach_ini(void)
 {
     // Initialize and attach callbacks for button SW0
     Button_Create("pause", &sw0, Read_SW0_Level);
-    Button_Attach(&sw0, BUTTON_DOWN, SW0_Down_CallBack);
+    Button_Attach(&sw0, BUTTON_DOWN, pause_button_down_callcak);
 
     // Initialize and attach callbacks for button SW1
     Button_Create("reset", &sw1, Read_SW1_Level);
-    Button_Attach(&sw1, BUTTON_DOWN, SW1_Down_CallBack);
+    Button_Attach(&sw1, BUTTON_DOWN, rst_button_down_callcak);
+}
+void Button_Process(void)
+{
+    struct button* pass_btn;
+    for (pass_btn = Head_Button; pass_btn != NULL; pass_btn = pass_btn->Next)
+    {
+        Button_Cycle_Process(pass_btn);
+    }
 }
 
-/* ------------------------------------------- functions ----------------------------------------- */
-
+/* ------------------------------------ internal functions ----------------------------------------- */
 /************************************************************
  * @brief   Button state machine process for cycling through button states
  * @param   btn: The button object
@@ -136,15 +139,15 @@ void Button_Cycle_Process(button_t* btn)
                     TRIGGER_CB(BUTTON_LONG);
                 }
             }
-#endif
+#endif  // End of LONG_FREE_TRIGGER
             if (btn->down_timecnt == 0xFF)
             {
                 btn->down_timecnt = BUTTON_LONG_TIME + 1;
             }
+#endif  // End of CONTINUOS_TRIGGER
         }
-#endif
-            break;
-        }
+        break;
+    }
     case BUTTON_UP:
     {
         // Handle button release events
@@ -234,131 +237,118 @@ void Button_Cycle_Process(button_t* btn)
     {
         break;
     }
-    }  // switch end
-    }  // Function end
+    }  // end of switch
+}  // end of void Button_Cycle_Process(button_t* btn)
 
-    /**************************************************************************************************
-     * function	: Button_Process
-     * brief	: Process each button in the linked list
-     **************************************************************************************************/
-    void Button_Process(void)
+/**************************************************************************************************
+ * function	: Add_Button
+ * brief	: Add a button to the linked list
+ **************************************************************************************************/
+void Add_Button(button_t* btn)
+{
+    struct button* pass_btn = Head_Button;
+
+    while (pass_btn)
     {
-        struct button* pass_btn;
-        for (pass_btn = Head_Button; pass_btn != NULL; pass_btn = pass_btn->Next)
-        {
-            Button_Cycle_Process(pass_btn);
-        }
+        pass_btn = pass_btn->Next;
     }
 
-    /**************************************************************************************************
-     * function	: Add_Button
-     * brief	: Add a button to the linked list
-     **************************************************************************************************/
-    void Add_Button(button_t * btn)
+    btn->Next   = Head_Button;
+    Head_Button = btn;
+}
+
+/**************************************************************************************************
+ * function	: Button_Delete
+ * brief	: Remove a button from the linked list
+ **************************************************************************************************/
+void Button_Delete(button_t* btn)
+{
+    struct button** curr;
+    for (curr = &Head_Button; *curr;)
     {
-        struct button* pass_btn = Head_Button;
-
-        while (pass_btn)
+        struct button* entry = *curr;
+        if (entry == btn)
         {
-            pass_btn = pass_btn->Next;
-        }
-
-        btn->Next   = Head_Button;
-        Head_Button = btn;
-    }
-
-    /**************************************************************************************************
-     * function	: Button_Delete
-     * brief	: Remove a button from the linked list
-     **************************************************************************************************/
-    void Button_Delete(button_t * btn)
-    {
-        struct button** curr;
-        for (curr = &Head_Button; *curr;)
-        {
-            struct button* entry = *curr;
-            if (entry == btn)
-            {
-                *curr = entry->Next;
-            }
-            else
-            {
-                curr = &entry->Next;
-            }
-        }
-    }
-
-    /**************************************************************************************************
-     * function	: Button_Create
-     * brief	: Create a new button and add it to the list
-     **************************************************************************************************/
-    boolean_t Button_Create(const char* name, button_t* btn, uint8_t (*read_btn_level)(void))
-    {
-        if (btn == NULL)
-        {
-            return FALSE;
-        }
-
-        // Initialize button properties
-        memset(btn, 0, sizeof(struct button));
-        StrnCopy(btn->Name, name, BTN_NAME_MAX);
-
-        btn->Button_State         = NONE_TRIGGER;
-        btn->Button_Trigger_Event = NONE_TRIGGER;
-        btn->Read_Button_Level    = read_btn_level;
-        btn->Button_Trigger_Level = HIGHT;
-        btn->Button_Last_Level    = btn->Read_Button_Level();
-        btn->level_timercnt       = 0;
-
-        // Add to the button list
-        Add_Button(btn);
-
-        return TRUE;
-    }
-
-    /**************************************************************************************************
-     * function	: Button_Attach
-     * brief	: Attach a callback to a button event
-     **************************************************************************************************/
-    boolean_t Button_Attach(button_t * btn, Button_Event btn_event, Button_CallBack btn_callback)
-    {
-        uint8_t i = 0;
-        if (btn == NULL)
-        {
-            return FALSE;
-        }
-
-        if (BUTTON_ALL_RIGGER == btn_event)
-        {
-            for (i = 0; i < number_of_event - 1; i++)
-                btn->CallBack_Function[i] = btn_callback;
+            *curr = entry->Next;
         }
         else
         {
-            btn->CallBack_Function[btn_event] = btn_callback;
+            curr = &entry->Next;
         }
-        return TRUE;
+    }
+}
+
+/**************************************************************************************************
+ * function	: Button_Create
+ * brief	: Create a new button and add it to the list
+ **************************************************************************************************/
+boolean_t Button_Create(const char* name, button_t* btn, uint8_t (*read_btn_level)(void))
+{
+    if (btn == NULL)
+    {
+        return FALSE;
     }
 
-    /**************************************************************************************************
-     * function	: StrnCopy
-     * brief	: Safely copy a string with a given length
-     **************************************************************************************************/
-    static char* StrnCopy(char* dst, const char* src, uint32_t n)
+    // Initialize button properties
+    memset(btn, 0, sizeof(struct button));
+    StrnCopy(btn->Name, name, BTN_NAME_MAX);
+
+    btn->Button_State         = NONE_TRIGGER;
+    btn->Button_Trigger_Event = NONE_TRIGGER;
+    btn->Read_Button_Level    = read_btn_level;
+    btn->Button_Trigger_Level = HIGHT;
+    btn->Button_Last_Level    = btn->Read_Button_Level();
+    btn->level_timercnt       = 0;
+
+    // Add to the button list
+    Add_Button(btn);
+
+    return TRUE;
+}
+
+/**************************************************************************************************
+ * function	: Button_Attach
+ * brief	: Attach a callback to a button event
+ **************************************************************************************************/
+boolean_t Button_Attach(button_t* btn, Button_Event btn_event, Button_CallBack btn_callback)
+{
+    uint8_t i = 0;
+    if (btn == NULL)
     {
-        if (n != 0)
-        {
-            char*       d = dst;
-            const char* s = src;
-            do
-            {
-                if ((*d++ = *s++) == 0)
-                {
-                    while (--n != 0)
-                        *d++ = 0;
-                    break;
-                }
-            } while (--n != 0);
-        }
-        return (dst);
+        return FALSE;
     }
+
+    if (BUTTON_ALL_RIGGER == btn_event)
+    {
+        for (i = 0; i < number_of_event - 1; i++)
+            btn->CallBack_Function[i] = btn_callback;
+    }
+    else
+    {
+        btn->CallBack_Function[btn_event] = btn_callback;
+    }
+    return TRUE;
+}
+
+/**************************************************************************************************
+ * function	: StrnCopy
+ * brief	: Safely copy a string with a given length
+ **************************************************************************************************/
+static char* StrnCopy(char* dst, const char* src, uint32_t n)
+{
+    if (n != 0)
+    {
+        char*       d = dst;
+        const char* s = src;
+        do
+        {
+            if ((*d++ = *s++) == 0)
+            {
+                while (--n != 0)
+                    *d++ = 0;
+                break;
+            }
+        } while (--n != 0);
+    }
+    return (dst);
+}

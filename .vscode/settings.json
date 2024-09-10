@@ -1,6 +1,11 @@
 {
     "files.associations": {
         "my_define.h": "c",
-        "usart.h": "c"
+        "usart.h": "c",
+        "gpio.h": "c",
+        "tm1637.h": "c",
+        "stdio.h": "c",
+        "string.h": "c",
+        "cmsis_os.h": "c"
     }
 }

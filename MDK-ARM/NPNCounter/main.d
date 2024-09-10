@@ -25,6 +25,8 @@ npncounter\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h
 npncounter\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
 npncounter\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
 npncounter\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
+npncounter\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
+npncounter\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
 npncounter\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 npncounter\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 npncounter\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
@@ -40,5 +42,6 @@ npncounter\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
 npncounter\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 npncounter\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 npncounter\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
+npncounter\main.o: ../Core/Inc/tim.h
 npncounter\main.o: ../Core/Inc/usart.h
 npncounter\main.o: ../Core/Inc/gpio.h
