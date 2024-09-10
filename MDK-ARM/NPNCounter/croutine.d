@@ -1,0 +1,14 @@
+npncounter\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/croutine.c
+npncounter\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+npncounter\croutine.o: C:\Users\liliput\AppData\Local\Keil_v5\ARM\ARMCC\include\stddef.h
+npncounter\croutine.o: C:\Users\liliput\AppData\Local\Keil_v5\ARM\ARMCC\include\stdint.h
+npncounter\croutine.o: ../Core/Inc/FreeRTOSConfig.h
+npncounter\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+npncounter\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+npncounter\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+npncounter\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3/portmacro.h
+npncounter\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+npncounter\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+npncounter\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+npncounter\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/croutine.h
+npncounter\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h

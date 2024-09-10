@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "my_define.h": "c",
+        "usart.h": "c"
+    }
+}

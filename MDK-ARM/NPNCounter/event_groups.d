@@ -1,0 +1,15 @@
+npncounter\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/event_groups.c
+npncounter\event_groups.o: C:\Users\liliput\AppData\Local\Keil_v5\ARM\ARMCC\include\stdlib.h
+npncounter\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+npncounter\event_groups.o: C:\Users\liliput\AppData\Local\Keil_v5\ARM\ARMCC\include\stddef.h
+npncounter\event_groups.o: C:\Users\liliput\AppData\Local\Keil_v5\ARM\ARMCC\include\stdint.h
+npncounter\event_groups.o: ../Core/Inc/FreeRTOSConfig.h
+npncounter\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+npncounter\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+npncounter\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+npncounter\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3/portmacro.h
+npncounter\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+npncounter\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+npncounter\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+npncounter\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+npncounter\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h

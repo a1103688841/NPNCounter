@@ -1,0 +1,15 @@
+npncounter\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/queue.c
+npncounter\queue.o: C:\Users\liliput\AppData\Local\Keil_v5\ARM\ARMCC\include\stdlib.h
+npncounter\queue.o: C:\Users\liliput\AppData\Local\Keil_v5\ARM\ARMCC\include\string.h
+npncounter\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+npncounter\queue.o: C:\Users\liliput\AppData\Local\Keil_v5\ARM\ARMCC\include\stddef.h
+npncounter\queue.o: C:\Users\liliput\AppData\Local\Keil_v5\ARM\ARMCC\include\stdint.h
+npncounter\queue.o: ../Core/Inc/FreeRTOSConfig.h
+npncounter\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+npncounter\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+npncounter\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+npncounter\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3/portmacro.h
+npncounter\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+npncounter\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+npncounter\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+npncounter\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h

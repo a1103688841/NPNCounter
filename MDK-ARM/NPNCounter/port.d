@@ -1,0 +1,12 @@
+npncounter\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3/port.c
+npncounter\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+npncounter\port.o: C:\Users\liliput\AppData\Local\Keil_v5\ARM\ARMCC\include\stddef.h
+npncounter\port.o: C:\Users\liliput\AppData\Local\Keil_v5\ARM\ARMCC\include\stdint.h
+npncounter\port.o: ../Core/Inc/FreeRTOSConfig.h
+npncounter\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+npncounter\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+npncounter\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+npncounter\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3/portmacro.h
+npncounter\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+npncounter\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+npncounter\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h

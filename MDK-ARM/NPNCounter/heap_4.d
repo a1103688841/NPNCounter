@@ -1,0 +1,13 @@
+npncounter\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
+npncounter\heap_4.o: C:\Users\liliput\AppData\Local\Keil_v5\ARM\ARMCC\include\stdlib.h
+npncounter\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+npncounter\heap_4.o: C:\Users\liliput\AppData\Local\Keil_v5\ARM\ARMCC\include\stddef.h
+npncounter\heap_4.o: C:\Users\liliput\AppData\Local\Keil_v5\ARM\ARMCC\include\stdint.h
+npncounter\heap_4.o: ../Core/Inc/FreeRTOSConfig.h
+npncounter\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+npncounter\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+npncounter\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+npncounter\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM3/portmacro.h
+npncounter\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+npncounter\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+npncounter\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
