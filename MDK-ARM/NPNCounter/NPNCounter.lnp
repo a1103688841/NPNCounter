@@ -34,7 +34,7 @@
 "npncounter\port.o"
 "npncounter\button_4.o"
 "npncounter\tm1637_1.o"
---strict --scatter "NPNCounter\NPNCounter.sct"
+--library_type=microlib --strict --scatter "NPNCounter\NPNCounter.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "NPNCounter.map" -o NPNCounter\NPNCounter.axf

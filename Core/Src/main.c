@@ -25,7 +25,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -52,13 +53,25 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 void MX_FREERTOS_Init(void);
+static void MX_NVIC_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+int fputc(int ch, FILE* f)
+{
+    HAL_UART_Transmit(&huart1, (uint8_t*)&ch, 1, 0xFFFF);
+    return (ch);
+}
+int fgetc(FILE* f)
+{
+    int ch;
+    while (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_RXNE) == RESET);
+    HAL_UART_Receive(&huart1, (uint8_t*)&ch, 1, 0xFFFF);
+    return (ch);
+}
 /* USER CODE END 0 */
 
 /**
@@ -69,7 +82,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+	unsigned char hal_uart1_rx;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -92,9 +105,13 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   MX_TIM1_Init();
+
+  /* Initialize interrupts */
+  MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
   //dbg_cmd_init(1);
-  HAL_TIM_Base_Start(&htim1);
+  HAL_TIM_Base_Start_IT(&htim1);
+	printf("task start...\n");
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in cmsis_os2.c) */
@@ -107,6 +124,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
     while (1)
     {
     /* USER CODE END WHILE */
@@ -150,6 +168,26 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief NVIC Configuration.
+  * @retval None
+  */
+static void MX_NVIC_Init(void)
+{
+  /* USART1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(USART1_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(USART1_IRQn);
+  /* TIM1_UP_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(TIM1_UP_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(TIM1_UP_IRQn);
+  /* EXTI1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(EXTI1_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(EXTI1_IRQn);
+  /* EXTI0_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(EXTI0_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 }
 
 /* USER CODE BEGIN 4 */

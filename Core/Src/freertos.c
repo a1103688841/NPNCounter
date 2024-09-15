@@ -160,7 +160,7 @@ void StartDefaultTask(void const * argument)
     /* Infinite loop */
     for (;;)
     {
-        osDelay(1);
+        osDelay(pdMS_TO_TICKS(1000));
     }
   /* USER CODE END StartDefaultTask */
 }
@@ -198,7 +198,8 @@ void StartCounterTask(void const * argument)
     /* Infinite loop */
     for (;;)
     {
-        osDelay(1);
+				printf("time=%dh:%dm:%ds,coutner=%d",rtc_display.hour,rtc_display.min,rtc_display.sec,counter_display.cnt);
+        osDelay(pdMS_TO_TICKS(1000));
     }
   /* USER CODE END StartCounterTask */
 }
@@ -245,7 +246,13 @@ void StartCmdLine(void const * argument)
 /* USER CODE BEGIN Application */
 void pause_button_down_callcak()
 {
+	if(counter_display.pause_flag == 1)
+	{
+		counter_display.pause_flag = 0;
+	}
+	else{
     counter_display.pause_flag = 1;
+	}
 }
 void rst_button_down_callcak()
 {

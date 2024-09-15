@@ -17,46 +17,28 @@ Library Manager: ArmAr.exe V5.06 update 7 (build 960)
 Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
 CPU DLL:         SARMCM3.DLL V5.40.0.3
 Dialog DLL:      DCM.DLL V1.17.5.0
-Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.3.0.0
+Target DLL:      CMSIS_AGDI.dll V1.33.18.0
 Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
 D:\workspace\STM32_NPNCounter\NPNCounter\MDK-ARM\NPNCounter.uvprojx
-Project File Date:  09/10/2024
+Project File Date:  09/15/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Users\liliput\AppData\Local\Keil_v5\ARM\ARMCC\Bin'
 Build target 'NPNCounter'
 Note: source file '..\User\button.c' - object file renamed from 'NPNCounter\button.o' to 'NPNCounter\button_4.o'.
 Note: source file '..\User\tm1637.c' - object file renamed from 'NPNCounter\tm1637.o' to 'NPNCounter\tm1637_1.o'.
-compiling freertos.c...
-../Core/Src/../../User/tm1637.h(75): warning:  #1295-D: Deprecated declaration tm1637_task_init - give arg types
-  void tm1637_task_init();
-../Core/Src/../../User/tm1637.h(76): warning:  #1295-D: Deprecated declaration tm1637_task_proceess - give arg types
-  void tm1637_task_proceess();
-../Core/Src/../../User/tm1637.h(91): warning:  #1-D: last line of file ends without a newline
-  #endif
-../Core/Src/freertos.c: 3 warnings, 0 errors
-compiling stm32f1xx_it.c...
-../Core/Src/../../User/tm1637.h(75): warning:  #1295-D: Deprecated declaration tm1637_task_init - give arg types
-  void tm1637_task_init();
-../Core/Src/../../User/tm1637.h(76): warning:  #1295-D: Deprecated declaration tm1637_task_proceess - give arg types
-  void tm1637_task_proceess();
-../Core/Src/../../User/tm1637.h(91): warning:  #1-D: last line of file ends without a newline
-  #endif
-../Core/Src/stm32f1xx_it.c: 3 warnings, 0 errors
-compiling tm1637.c...
-..\User\tm1637.h(75): warning:  #1295-D: Deprecated declaration tm1637_task_init - give arg types
-  void tm1637_task_init();
-..\User\tm1637.h(76): warning:  #1295-D: Deprecated declaration tm1637_task_proceess - give arg types
-  void tm1637_task_proceess();
-..\User\tm1637.h(91): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\User\tm1637.c: 3 warnings, 0 errors
+assembling startup_stm32f103xb.s...
+compiling gpio.c...
+compiling main.c...
+../Core/Src/main.c(85): warning:  #177-D: variable "hal_uart1_rx"  was declared but never referenced
+  	unsigned char hal_uart1_rx;
+../Core/Src/main.c: 1 warning, 0 errors
 linking...
-Program Size: Code=11612 RO-data=536 RW-data=152 ZI-data=8856  
+Program Size: Code=17796 RO-data=544 RW-data=156 ZI-data=8252  
 FromELF: creating hex file...
-"NPNCounter\NPNCounter.axf" - 0 Error(s), 9 Warning(s).
+"NPNCounter\NPNCounter.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 

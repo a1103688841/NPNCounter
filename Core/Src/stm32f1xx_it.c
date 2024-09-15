@@ -24,6 +24,7 @@
 #include "task.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "tim.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -245,13 +246,20 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
     if (GPIO_Pin == GPIO_PIN_1)
     {
+      			if(counter_display.pause_flag == 1)
+			{
+				counter_display.cnt = counter_display.cnt;
+			}
+			else{
         counter_display.cnt++;
+      }
     }
 }
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
 {
     if (htim == (&htim1))
     {
+
         rtc_display.sec_accumulate++;
     }
 }

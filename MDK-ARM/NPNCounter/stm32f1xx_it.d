@@ -38,5 +38,6 @@ npncounter\stm32f1xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/R
 npncounter\stm32f1xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
 npncounter\stm32f1xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 npncounter\stm32f1xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+npncounter\stm32f1xx_it.o: ../Core/Inc/tim.h
 npncounter\stm32f1xx_it.o: ../Core/Src/../../User/tm1637.h
 npncounter\stm32f1xx_it.o: C:\Users\liliput\AppData\Local\Keil_v5\ARM\ARMCC\include\stdbool.h
