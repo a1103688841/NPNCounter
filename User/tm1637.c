@@ -3,6 +3,7 @@
 // #include "tm1637_config.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdint.h>
 // #######################################################################################################################
 #if _TM1637_FREERTOS == 0
 #define tm1637_delay_ms(x) HAL_Delay(x)
@@ -51,31 +52,28 @@ void tm1637_task_init()
 {
     tm1637_init(&tm1637_ic1, GPIOB, GPIO_PIN_10, GPIOB, GPIO_PIN_11);
     tm1637_init(&tm1637_ic2, GPIOB, GPIO_PIN_8, GPIOB, GPIO_PIN_9);
-    tm1637_fill(&tm1637_ic1, true);
-    tm1637_fill(&tm1637_ic2, true);
+    tm1637_fill(&tm1637_ic1, false);
+    tm1637_fill(&tm1637_ic2, false);
 }
 void tm1637_task_proceess()
 {
     // rtc
     static uint8_t digit_segment[6] = { 0x3f };
-    rtc_display.sec                 = rtc_display.sec_accumulate % 60;
-    rtc_display.min                 = rtc_display.sec_accumulate / 60 % 60;
-    rtc_display.hour                = rtc_display.sec_accumulate / 60 / 60 % 60;
     rtc_display.sec_1               = rtc_display.sec % 10;
-    digit_segment[0]                = _tm1637_digit[rtc_display.sec_1];
+    digit_segment[5]                = _tm1637_digit[rtc_display.sec_1];
     rtc_display.sec_10              = rtc_display.sec / 10;
-    digit_segment[1]                = _tm1637_digit[rtc_display.sec_10];
+    digit_segment[4]                = _tm1637_digit[rtc_display.sec_10];
     rtc_display.min_1               = rtc_display.min % 10;
-    digit_segment[2]                = _tm1637_digit[rtc_display.min_1] | _tm1637_dot;
+    digit_segment[3]                = _tm1637_digit[rtc_display.min_1] | _tm1637_dot;
     rtc_display.min_10              = rtc_display.min / 10;
-    digit_segment[3]                = _tm1637_digit[rtc_display.min_10];
+    digit_segment[2]                = _tm1637_digit[rtc_display.min_10];
     rtc_display.hour_1              = rtc_display.hour % 10;
-    digit_segment[4]                = _tm1637_digit[rtc_display.hour_1] | _tm1637_dot;
+    digit_segment[1]                = _tm1637_digit[rtc_display.hour_1] | _tm1637_dot;
     rtc_display.hour_10             = rtc_display.hour / 10;
-    digit_segment[5]                = _tm1637_digit[rtc_display.hour_10];
+    digit_segment[0]                = _tm1637_digit[rtc_display.hour_10];
     tm1637_write_segment(&tm1637_ic1, digit_segment, 6, 0);
     // counter
-    tm1637_write_int(&tm1637_ic2, counter_display.cnt, 0);
+    tm1637_write_positiveInteger_rightAlign(&tm1637_ic2, counter_display.cnt, 0);
 }
 
 // #######################################################################################################################
@@ -226,6 +224,50 @@ void tm1637_write_int(tm1637_t* tm1637, int32_t digit, uint8_t pos)
             buffer[i] = 0;
             break;
         }
+    }
+    tm1637_write_raw(tm1637, buffer, 6, pos);
+    tm1637_unlock(tm1637);
+}
+void tm1637_write_positiveInteger_rightAlign(tm1637_t* tm1637, uint32_t digit, uint8_t pos)
+{
+    tm1637_lock(tm1637);
+    char    str[7];
+    uint8_t buffer[6] = { 0 };
+    snprintf(str, sizeof(str), "%d", digit);
+    int32_t  str_len    = 0;
+    uint32_t digit_iter = digit;
+    while (1)
+    {
+        digit_iter = digit_iter / 10;
+        str_len++;
+        if (digit_iter == 0)
+        {
+            break;
+        }
+    }
+    if (str_len < 6)
+    {
+				int i,j;
+        for (i = 0; i < str_len; i++)
+        {
+            if ((str[i] >= '0') && (str[i] <= '9'))
+            {
+                buffer[5 - i] = _tm1637_digit[str[str_len-1-i] - 48];
+            }
+        }
+        for (uint8_t i = str_len; i < 6; i++)
+        {
+            buffer[5 - i] = 0;
+        }
+    }
+    else
+    {
+        buffer[5] = _tm1637_digit[digit % 10];
+        buffer[4] = _tm1637_digit[digit / 10 % 10];
+        buffer[3] = _tm1637_digit[digit / 100 % 10];
+        buffer[2] = _tm1637_digit[digit / 1000 % 10];
+        buffer[1] = _tm1637_digit[digit / 10000 % 10];
+        buffer[0] = _tm1637_digit[digit / 100000 % 10];
     }
     tm1637_write_raw(tm1637, buffer, 6, pos);
     tm1637_unlock(tm1637);

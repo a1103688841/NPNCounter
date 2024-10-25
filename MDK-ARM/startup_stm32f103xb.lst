@@ -463,7 +463,7 @@ Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
 ork --depend=npncounter\startup_stm32f103xb.d -onpncounter\startup_stm32f103xb.
 o -I../Core/Inc -I.\RTE\_NPNCounter -IC:\Users\liliput\AppData\Local\Arm\Packs\
 ARM\CMSIS\6.1.0\CMSIS\Core\Include -IC:\Users\liliput\AppData\Local\Arm\Packs\K
-eil\STM32F1xx_DFP\2.4.0\Device\Include --predefine="__MICROLIB SETA 1" --predef
+eil\STM32F1xx_DFP\2.4.1\Device\Include --predefine="__MICROLIB SETA 1" --predef
 ine="__UVISION_VERSION SETA 540" --predefine="STM32F10X_MD SETA 1" --predefine=
 "_RTE_ SETA 1" --list=startup_stm32f103xb.lst startup_stm32f103xb.s
 

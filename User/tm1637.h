@@ -61,6 +61,7 @@ typedef struct
 {
     long long cnt;
     short     pause_flag;
+    short     reset_flag;
 } counter_data_t;
 #ifdef __TM1637_C__
 #define TM1637_EXT
@@ -72,16 +73,17 @@ extern segment_t      rtc_display;
 extern counter_data_t counter_display;
 
 // ####################################### externally function #############################################################################
-void tm1637_task_init();
-void tm1637_task_proceess();
+extern void tm1637_task_init();
+extern void tm1637_task_proceess();
 // ####################################### internal function #####################################################################
-void tm1637_init(tm1637_t* tm1637, GPIO_TypeDef* gpio_clk, uint16_t pin_clk, GPIO_TypeDef* gpio_dat, uint16_t pin_dat);
-void tm1637_brightness(tm1637_t* tm1637, uint8_t brightness_0_to_7);
-void tm1637_write_segment(tm1637_t* tm1637, const uint8_t* segments, uint8_t length, uint8_t pos);
-void tm1637_write_int(tm1637_t* tm1637, int32_t digit, uint8_t pos);
-void tm1637_write_float(tm1637_t* tm1637, float digit, uint8_t floating_digit, uint8_t pos);
-void tm1637_show_zero(tm1637_t* tm1637, bool enable);
-void tm1637_fill(tm1637_t* tm1637, bool enable);
+extern void tm1637_init(tm1637_t* tm1637, GPIO_TypeDef* gpio_clk, uint16_t pin_clk, GPIO_TypeDef* gpio_dat, uint16_t pin_dat);
+extern void tm1637_brightness(tm1637_t* tm1637, uint8_t brightness_0_to_7);
+extern void tm1637_write_segment(tm1637_t* tm1637, const uint8_t* segments, uint8_t length, uint8_t pos);
+extern void tm1637_write_int(tm1637_t* tm1637, int32_t digit, uint8_t pos);
+extern void tm1637_write_positiveInteger_rightAlign(tm1637_t* tm1637, uint32_t digit, uint8_t pos);
+extern void tm1637_write_float(tm1637_t* tm1637, float digit, uint8_t floating_digit, uint8_t pos);
+extern void tm1637_show_zero(tm1637_t* tm1637, bool enable);
+extern void tm1637_fill(tm1637_t* tm1637, bool enable);
 // ####################################################################################################################
 
 #ifdef __cplusplus

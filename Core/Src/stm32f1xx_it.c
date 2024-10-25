@@ -259,8 +259,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
 {
     if (htim == (&htim1))
     {
-
+  			if(counter_display.pause_flag == 0)
+			{
         rtc_display.sec_accumulate++;
+			}
+			  rtc_display.sec                 = rtc_display.sec_accumulate % 60;
+				rtc_display.min                 = rtc_display.sec_accumulate / 60 % 60;
+				rtc_display.hour                = rtc_display.sec_accumulate / 60 / 60 % 60;
     }
 }
 /* USER CODE END 1 */

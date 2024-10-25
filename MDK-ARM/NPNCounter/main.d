@@ -42,7 +42,7 @@ npncounter\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
 npncounter\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 npncounter\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 npncounter\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
+npncounter\main.o: ../Core/Inc/gpio.h
 npncounter\main.o: ../Core/Inc/tim.h
 npncounter\main.o: ../Core/Inc/usart.h
-npncounter\main.o: ../Core/Inc/gpio.h
 npncounter\main.o: C:\Users\liliput\AppData\Local\Keil_v5\ARM\ARMCC\include\stdio.h

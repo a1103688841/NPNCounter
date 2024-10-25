@@ -126,7 +126,7 @@ void MX_FREERTOS_Init(void) {
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* definition and creation of seg_display */
-  osThreadStaticDef(seg_display, StartSegDisplay, osPriorityIdle, 0, 128, seg_displayBuffer, &seg_displayControlBlock);
+  osThreadStaticDef(seg_display, StartSegDisplay, osPriorityNormal, 0, 128, seg_displayBuffer, &seg_displayControlBlock);
   seg_displayHandle = osThreadCreate(osThread(seg_display), NULL);
 
   /* definition and creation of counter_task */
@@ -134,7 +134,7 @@ void MX_FREERTOS_Init(void) {
   counter_taskHandle = osThreadCreate(osThread(counter_task), NULL);
 
   /* definition and creation of button_task */
-  osThreadStaticDef(button_task, StartButtonTask, osPriorityIdle, 0, 128, button_taskBuffer, &button_taskControlBlock);
+  osThreadStaticDef(button_task, StartButtonTask, osPriorityRealtime, 0, 128, button_taskBuffer, &button_taskControlBlock);
   button_taskHandle = osThreadCreate(osThread(button_task), NULL);
 
   /* definition and creation of cmd_line */
@@ -198,7 +198,20 @@ void StartCounterTask(void const * argument)
     /* Infinite loop */
     for (;;)
     {
-				printf("time=%dh:%dm:%ds,coutner=%d",rtc_display.hour,rtc_display.min,rtc_display.sec,counter_display.cnt);
+				printf("time=%dh:%dm:%ds,coutner=%d,",rtc_display.hour,rtc_display.min,rtc_display.sec,counter_display.cnt);
+			if(counter_display.pause_flag == 1)
+			{
+				printf("Pause\n");
+			}
+			else if(counter_display.reset_flag == 1)
+			{
+				printf("Reset\n");
+				counter_display.reset_flag = 0;
+			}
+			else 
+			{
+				printf("Running\n");
+			}
         osDelay(pdMS_TO_TICKS(1000));
     }
   /* USER CODE END StartCounterTask */
@@ -219,7 +232,7 @@ void StartButtonTask(void const * argument)
     for (;;)
     {
         Button_Process();
-        osDelay(pdMS_TO_TICKS(20));
+        osDelay(pdMS_TO_TICKS(5));
     }
   /* USER CODE END StartButtonTask */
 }
@@ -257,6 +270,12 @@ void pause_button_down_callcak()
 void rst_button_down_callcak()
 {
     counter_display.cnt = 0;
+	counter_display.pause_flag = 0;
+		counter_display.reset_flag = 1;
+	        rtc_display.sec_accumulate=0;
+			  rtc_display.sec                 = rtc_display.sec_accumulate % 60;
+				rtc_display.min                 = rtc_display.sec_accumulate / 60 % 60;
+				rtc_display.hour                = rtc_display.sec_accumulate / 60 / 60 % 60;
 }
 /* USER CODE END Application */
 

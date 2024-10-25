@@ -47,11 +47,11 @@ void Button_Attach_ini(void)
 {
     // Initialize and attach callbacks for button SW0
     Button_Create("pause", &sw0, Read_SW0_Level);
-    Button_Attach(&sw0, BUTTON_DOWN, pause_button_down_callcak);
+    Button_Attach(&sw0, BUTTON_DOWN, rst_button_down_callcak);
 
     // Initialize and attach callbacks for button SW1
     Button_Create("reset", &sw1, Read_SW1_Level);
-    Button_Attach(&sw1, BUTTON_DOWN, rst_button_down_callcak);
+    Button_Attach(&sw1, BUTTON_DOWN, pause_button_down_callcak);
 }
 void Button_Process(void)
 {
